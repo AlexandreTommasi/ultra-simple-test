@@ -1,0 +1,7 @@
+{
+  "name": "ultra-simple-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Building...' && mkdir -p dist && cp index.html dist/ && cp -r src dist/"
+  }
+}

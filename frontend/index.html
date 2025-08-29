@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Simple - Deploy Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Ultra Simple Deploy Test</h1>
+        
+        <div class="status">
+            <h2>Status do Sistema</h2>
+            <p>Frontend: <span class="success">✅ HTML Puro</span></p>
+            <p>Backend: <span id="api-status">Verificando...</span></p>
+            <p>Deploy: <span class="success">✅ Azure App Service</span></p>
+        </div>
+
+        <div class="status">
+            <h2>Informações</h2>
+            <p>Este é o projeto mais simples possível:</p>
+            <ul>
+                <li>Frontend: HTML + JavaScript puro</li>
+                <li>Backend: Node.js + Express (sem TypeScript)</li>
+                <li>Sem build complexo</li>
+                <li>Garantido de funcionar!</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="testAPI()">Testar API</button>
+            <div id="api-response" style="margin-top: 20px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test API on load
+        fetch('/api/test')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('api-status').innerHTML = '<span class="success">✅ Online</span>';
+            })
+            .catch(err => {
+                document.getElementById('api-status').innerHTML = '<span class="error">❌ Offline</span>';
+            });
+
+        function testAPI() {
+            fetch('/api/test')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('api-response').innerHTML = 
+                        '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                })
+                .catch(err => {
+                    document.getElementById('api-response').innerHTML = 
+                        '<span class="error">Erro: ' + err + '</span>';
+                });
+        }
+    </script>
+</body>
+</html>
